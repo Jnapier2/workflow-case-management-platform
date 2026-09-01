@@ -209,8 +209,8 @@
     },
     {
       "path": "app/services/workflow_engine.py",
-      "sha256": "6D731EE02A043E79FA9A39961181A6F69A1BD0C3BD2EDAC9DD6FBADD5BDBF7DF",
-      "size": 41329
+      "sha256": "84774F9E6D23D8E743746F7FF1C121EA3DAE4F254E04F83593CEA1C61EEC5171",
+      "size": 41882
     },
     {
       "path": "app/services/workflow_versions.py",
@@ -444,7 +444,7 @@
     },
     {
       "path": "PACKAGE_METADATA.json",
-      "sha256": "226E8F1D4D07952B62048ED2D1AE0F6627C5D7C130BF9434B0124D2EF1354E08",
+      "sha256": "6EE5432ED6D5E0FC2C02AC6F183CA1BAD2120B97A030F1A632DB03906CB9A278",
       "size": 6517
     },
     {
@@ -618,7 +618,7 @@
       "size": 22
     }
   ],
-  "generated_utc": "2026-09-01T07:57:47.231778Z",
+  "generated_utc": "2026-09-01T08:46:28.091993Z",
   "hash_algorithm": "SHA-256",
   "managed_file_count": 123,
   "package_id": "gateway.workflow_case_management",

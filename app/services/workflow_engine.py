@@ -330,7 +330,19 @@ def allowed_transitions(config: dict[str, Any], stage_key: str) -> list[dict[str
 
 def _normalize_email(value: str) -> str:
     value = value.strip().lower()
-    if not re.fullmatch(r"[^\s@]+@[^\s@]+\.[^\s@]+", value):
+    local, separator, domain = value.rpartition("@")
+    labels = domain.split(".")
+    if (
+        len(value) > 254
+        or not separator
+        or not local
+        or len(local) > 64
+        or any(character.isspace() for character in value)
+        or any(character in {"<", ">", "(", ")", ",", ";", ":", "\\", "[", "]", '"'} for character in local)
+        or len(labels) < 2
+        or any(not label or len(label) > 63 or label.startswith("-") or label.endswith("-") for label in labels)
+        or any(not all(character.isalnum() or character == "-" for character in label) for label in labels)
+    ):
         raise WorkflowValidationError("Enter a valid email address.")
     return value
 
