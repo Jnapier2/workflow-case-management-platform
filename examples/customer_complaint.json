@@ -1,0 +1,227 @@
+{
+  "key": "customer_complaint",
+  "name": "Customer Complaint",
+  "version": 2,
+  "description": "Triage, investigate, resolve, and close customer complaints with documented evidence and service targets.",
+  "reference_prefix": "CMP",
+  "initial_stage": "submitted",
+  "total_sla_hours": 120,
+  "fields": [
+    {
+      "key": "customer_name",
+      "label": "Customer name",
+      "type": "text",
+      "required": true,
+      "max_length": 120
+    },
+    {
+      "key": "contact_email",
+      "label": "Contact email",
+      "type": "email",
+      "required": true
+    },
+    {
+      "key": "channel",
+      "label": "Received through",
+      "type": "select",
+      "required": true,
+      "options": [
+        "Email",
+        "Phone",
+        "Web form",
+        "Store",
+        "Regulator"
+      ]
+    },
+    {
+      "key": "category",
+      "label": "Complaint category",
+      "type": "select",
+      "required": true,
+      "options": [
+        "Billing",
+        "Service quality",
+        "Delivery",
+        "Privacy",
+        "Accessibility",
+        "Other"
+      ]
+    },
+    {
+      "key": "customer_impact",
+      "label": "Customer impact",
+      "type": "select",
+      "required": true,
+      "options": [
+        "Low",
+        "Moderate",
+        "High",
+        "Critical"
+      ]
+    },
+    {
+      "key": "incident_date",
+      "label": "Incident date",
+      "type": "date",
+      "required": true
+    },
+    {
+      "key": "complaint_details",
+      "label": "Complaint details",
+      "type": "textarea",
+      "required": true,
+      "max_length": 2500
+    }
+  ],
+  "stages": [
+    {
+      "key": "submitted",
+      "label": "Submitted",
+      "description": "Complaint received.",
+      "default_role": "Customer Care Analyst",
+      "sla_hours": 8
+    },
+    {
+      "key": "triage",
+      "label": "Triage",
+      "description": "Severity, category, ownership, and response needs are confirmed.",
+      "default_role": "Customer Care Analyst",
+      "sla_hours": 16
+    },
+    {
+      "key": "investigation",
+      "label": "Investigation",
+      "description": "Facts, evidence, and root contributors are documented.",
+      "default_role": "Complaint Investigator",
+      "sla_hours": 48,
+      "required_skills": [
+        "complaint_investigation"
+      ]
+    },
+    {
+      "key": "resolution",
+      "label": "Resolution Review",
+      "description": "The proposed response and corrective action are approved.",
+      "default_role": "Customer Care Manager",
+      "sla_hours": 24,
+      "approvals": [
+        {
+          "key": "resolution_approval",
+          "name": "Resolution approval",
+          "assigned_role": "Customer Care Manager"
+        }
+      ]
+    },
+    {
+      "key": "closed",
+      "label": "Closed",
+      "description": "The response and closure evidence are complete.",
+      "terminal": true
+    },
+    {
+      "key": "rejected",
+      "label": "Invalid or Withdrawn",
+      "description": "The record was closed without investigation and the reason was documented.",
+      "terminal": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "submitted",
+      "to": "triage",
+      "label": "Begin triage",
+      "roles": [
+        "Customer Care Analyst",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "triage",
+      "to": "investigation",
+      "label": "Open investigation",
+      "roles": [
+        "Customer Care Analyst",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "triage",
+      "to": "rejected",
+      "label": "Close as invalid or withdrawn",
+      "roles": [
+        "Customer Care Analyst",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "investigation",
+      "to": "resolution",
+      "label": "Submit resolution",
+      "roles": [
+        "Complaint Investigator",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "resolution",
+      "to": "closed",
+      "label": "Close complaint",
+      "roles": [
+        "Customer Care Manager",
+        "Administrator"
+      ],
+      "requires_approvals": true,
+      "connector_actions": [
+        "portfolio_audit_log"
+      ]
+    },
+    {
+      "from": "resolution",
+      "to": "investigation",
+      "label": "Return for more investigation",
+      "roles": [
+        "Customer Care Manager",
+        "Administrator"
+      ]
+    }
+  ],
+  "business_calendar": {
+    "timezone": "America/Chicago",
+    "business_days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "start": "08:00",
+    "end": "17:00",
+    "holidays": [
+      "2026-01-01",
+      "2026-05-25",
+      "2026-07-03",
+      "2026-09-07",
+      "2026-11-26",
+      "2026-12-25"
+    ]
+  },
+  "sla_warning_hours": 4,
+  "escalation": {
+    "1": {
+      "notify_roles": [
+        "Administrator"
+      ],
+      "reassign_role": ""
+    },
+    "2": {
+      "notify_roles": [
+        "Administrator",
+        "Case Manager"
+      ],
+      "reassign_role": "Case Manager"
+    }
+  },
+  "rule_sets": [
+    "complaint_priority"
+  ]
+}

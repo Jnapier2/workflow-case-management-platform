@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Configurable workflow and case management portfolio application">
+  <title>{% block title %}{{ app_name }}{% endblock %}</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%2313293d%22/><path d=%22M17 18h30v9H17zm0 14h21v9H17zm0 14h30v4H17z%22 fill=%22%235eead4%22/></svg>">
+  <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span><strong>Case Operations</strong><small>Workflow control center</small></span>
+      </a>
+      <nav class="nav-list">
+        <a class="nav-item {% if request.url.path == '/' %}active{% endif %}" href="/">
+          <span class="nav-icon">◫</span><span>Dashboard</span>
+        </a>
+        <a class="nav-item {% if request.url.path.startswith('/cases') and request.url.path != '/cases/new' %}active{% endif %}" href="/cases">
+          <span class="nav-icon">▤</span><span>Cases</span>
+        </a>
+        <a class="nav-item {% if request.url.path == '/cases/new' %}active{% endif %}" href="/cases/new">
+          <span class="nav-icon">＋</span><span>New case</span>
+        </a>
+        <a class="nav-item {% if request.url.path.startswith('/workflows') %}active{% endif %}" href="/workflows">
+          <span class="nav-icon">⌘</span><span>Workflows</span>
+        </a>
+        <a class="nav-item {% if request.url.path.startswith('/queues') %}active{% endif %}" href="/queues">
+          <span class="nav-icon">☷</span><span>Work queues</span>
+        </a>
+        <a class="nav-item {% if request.url.path.startswith('/insights') %}active{% endif %}" href="/insights">
+          <span class="nav-icon">⌁</span><span>Process intelligence</span>
+        </a>
+        {% if actor and actor.role == 'Administrator' %}
+        <a class="nav-item {% if request.url.path.startswith('/studio') %}active{% endif %}" href="/studio">
+          <span class="nav-icon">✣</span><span>Workflow Studio</span>
+        </a>
+        {% endif %}
+        <a class="nav-item {% if request.url.path.startswith('/notifications') %}active{% endif %}" href="/notifications">
+          <span class="nav-icon">◉</span><span>Notifications</span>
+          {% if unread_notifications %}<span class="nav-badge">{{ unread_notifications }}</span>{% endif %}
+        </a>
+        <a class="nav-item {% if request.url.path == '/operations' %}active{% endif %}" href="/operations">
+          <span class="nav-icon">◇</span><span>Operations</span>
+        </a>
+        <a class="nav-item" href="/portal" target="_blank" rel="noopener">
+          <span class="nav-icon">◎</span><span>Requester portal</span>
+        </a>
+        <a class="nav-item" href="/api/docs" target="_blank" rel="noopener">
+          <span class="nav-icon">{ }</span><span>API docs</span>
+        </a>
+      </nav>
+      <div class="sidebar-note">
+        <span class="status-dot"></span>
+        <div><strong>Local portfolio demo</strong><small>Project-local data and evidence</small></div>
+      </div>
+      <div class="sidebar-footer">v{{ app_version }} · {{ build_id }}</div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <button class="mobile-menu" type="button" aria-label="Toggle navigation" data-menu-toggle>☰</button>
+        <div class="topbar-context">
+          <span class="eyebrow">Professional Portfolio</span>
+          <strong>Workflow &amp; Case Management</strong>
+        </div>
+        {% if actor and not oidc_enabled %}
+        <form class="actor-switch" method="post" action="/session/actor">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+          <input type="hidden" name="next" value="{{ request.url.path }}{% if request.url.query %}?{{ request.url.query }}{% endif %}">
+          <label for="actor_id"><span>Demo identity</span>
+            <select id="actor_id" name="actor_id" onchange="this.form.submit()">
+              {% for user in demo_users %}
+                <option value="{{ user.id }}" {% if user.id == actor.id %}selected{% endif %}>{{ user.name }} — {{ user.role }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        </form>
+        {% elif actor and oidc_enabled %}
+        <div class="actor-switch"><label><span>Signed in</span><strong>{{ actor.name }} — {{ actor.role }}</strong></label><a class="button button-ghost" href="/auth/logout">Sign out</a></div>
+        {% endif %}
+      </header>
+
+      <main class="main-content" id="main-content">
+        {% if flash %}
+          <div class="flash flash-{{ flash.kind }}" role="status">
+            <span>{{ flash.message }}</span><button type="button" aria-label="Dismiss message" data-dismiss>×</button>
+          </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+  <script src="{{ url_for('static', path='app.js') }}" defer></script>
+</body>
+</html>

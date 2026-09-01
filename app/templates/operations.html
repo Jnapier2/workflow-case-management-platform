@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Operations · {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header split-header">
+  <div>
+    <span class="eyebrow">Runtime assurance</span>
+    <h1>Operational health</h1>
+    <p>Database, durable work, recovery readiness, evidence storage, and request performance in one support view.</p>
+  </div>
+  <span class="pill {% if operations.status == 'Healthy' %}pill-success{% else %}pill-danger{% endif %}">{{ operations.status }}</span>
+</section>
+
+{% if operations.issues %}
+<section class="panel"><div class="panel-heading"><div><span class="eyebrow">Attention</span><h2>Current signals</h2></div></div>
+  <ul class="plain-list">{% for issue in operations.issues %}<li>{{ issue }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+<section class="metric-grid" aria-label="Operational metrics">
+  <article class="metric-card"><span class="metric-label">Database</span><strong>{{ operations.database.backend|upper }}</strong><small>Schema {{ operations.database.schema_version }} · {{ operations.database.health }}</small></article>
+  <article class="metric-card"><span class="metric-label">Search</span><strong>{{ operations.database.search_mode|replace('_',' ')|title }}</strong><small>Indexed case discovery</small></article>
+  <article class="metric-card {% if operations.outbox.Failed %}metric-alert{% endif %}"><span class="metric-label">Pending jobs</span><strong>{{ operations.outbox.Pending }}</strong><small>{{ operations.outbox.Failed }} failed · {{ operations.outbox.Processing }} processing</small></article>
+  <article class="metric-card"><span class="metric-label">Worker</span><strong>{{ operations.worker.state|title }}</strong><small>{{ operations.worker.jobs_processed }} jobs this run</small></article>
+  <article class="metric-card"><span class="metric-label">Requests</span><strong>{{ operations.requests.requests }}</strong><small>{{ operations.requests.average_ms }} ms average</small></article>
+  <article class="metric-card"><span class="metric-label">Slow requests</span><strong>{{ operations.requests.slow_requests }}</strong><small>{{ operations.requests.max_ms }} ms maximum</small></article>
+  <article class="metric-card {% if operations.integrations.Failed %}metric-alert{% endif %}"><span class="metric-label">Integrations</span><strong>{{ operations.integrations.Completed }}</strong><small>{{ operations.integrations.Queued }} queued · {{ operations.integrations.Failed }} failed</small></article>
+</section>
+
+<div class="dashboard-grid">
+  <section class="panel">
+    <div class="panel-heading"><div><span class="eyebrow">Persistence</span><h2>Database &amp; durable work</h2></div></div>
+    <div class="detail-grid">
+      <div><span>Target</span><strong class="mono-wrap">{{ operations.database.target }}</strong></div>
+      <div><span>Full-text mode</span><strong>{{ operations.database.search_mode }}</strong></div>
+      <div><span>Database size</span><strong>{% if operations.database.database_bytes is not none %}{{ operations.database.database_bytes|filesize }}{% else %}Managed externally{% endif %}</strong></div>
+      <div><span>WAL size</span><strong>{% if operations.database.wal_bytes is not none %}{{ operations.database.wal_bytes|filesize }}{% else %}—{% endif %}</strong></div>
+      <div><span>Oldest pending job</span><strong>{% if operations.outbox.oldest_pending_age_seconds is not none %}{{ operations.outbox.oldest_pending_age_seconds|round(1) }}s{% else %}None{% endif %}</strong></div>
+      <div><span>Queued notifications</span><strong>{{ operations.outbox.queued_notifications }}</strong></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-heading"><div><span class="eyebrow">Recovery</span><h2>Backup &amp; evidence</h2></div></div>
+    <div class="detail-grid">
+      <div><span>Managed backups</span><strong>{{ operations.storage.managed_backups.count }}</strong></div>
+      <div><span>Latest backup</span><strong>{{ operations.storage.managed_backups.latest or 'None yet' }}</strong></div>
+      <div><span>Recovery Doctor</span><strong>{{ operations.recovery.latest_doctor_result or 'Not run' }}{% if operations.recovery.latest_doctor_result and not operations.recovery.latest_doctor_current %} · stale{% endif %}</strong></div>
+      <div><span>Evidence records</span><strong>{{ operations.storage.attachment_count }}</strong></div>
+      <div><span>Evidence bytes</span><strong>{{ operations.storage.attachment_bytes|filesize }}</strong></div>
+      <div><span>Worker failures</span><strong>{{ operations.worker.failure_count }}</strong></div>
+      <div><span>Integration executions</span><strong>{{ operations.integrations.Completed }} complete / {{ operations.integrations.Failed }} failed</strong></div>
+    </div>
+  </section>
+</div>
+
+{% if operations.integrations.latest_failure %}<section class="panel"><div class="panel-heading"><div><span class="eyebrow">Integration exception</span><h2>Latest connector failure</h2></div></div><dl class="definition-list"><div><dt>Correlation ID</dt><dd class="mono-wrap">{{ operations.integrations.latest_failure.correlation_id }}</dd></div><div><dt>Recorded</dt><dd>{{ operations.integrations.latest_failure.created_at }}</dd></div><div><dt>Summary</dt><dd>{{ operations.integrations.latest_failure.error_summary }}</dd></div></dl></section>{% endif %}
+
+<section class="panel">
+  <div class="panel-heading"><div><span class="eyebrow">Performance</span><h2>Request timing</h2><p>Process-local observations since this application run started.</p></div></div>
+  <div class="detail-grid">
+    <div><span>Uptime</span><strong>{{ operations.requests.uptime_seconds|round(1) }}s</strong></div>
+    <div><span>Average</span><strong>{{ operations.requests.average_ms }} ms</strong></div>
+    <div><span>Maximum</span><strong>{{ operations.requests.max_ms }} ms</strong></div>
+    <div><span>Slow count</span><strong>{{ operations.requests.slow_requests }}</strong></div>
+    <div><span>Last slow path</span><strong>{{ operations.requests.last_slow_path or 'None' }}</strong></div>
+    <div><span>Last slow time</span><strong>{% if operations.requests.last_slow_ms is not none %}{{ operations.requests.last_slow_ms }} ms{% else %}—{% endif %}</strong></div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Error {{ status_code }} · {{ app_name }}{% endblock %}
+{% block content %}
+<section class="error-page"><span class="error-code">{{ status_code }}</span><h1>The request could not be completed</h1><p>{{ message }}</p><div><a class="button button-primary" href="/">Return to dashboard</a><a class="button button-ghost" href="/cases">Open case queue</a></div></section>
+{% endblock %}

@@ -1,0 +1,211 @@
+{
+  "key": "employee_access_request",
+  "name": "Employee Access Request",
+  "version": 2,
+  "description": "Controls manager approval, security review, and provisioning for employee system access.",
+  "reference_prefix": "ACC",
+  "initial_stage": "submitted",
+  "total_sla_hours": 96,
+  "fields": [
+    {
+      "key": "employee_name",
+      "label": "Employee name",
+      "type": "text",
+      "required": true,
+      "max_length": 120
+    },
+    {
+      "key": "employee_email",
+      "label": "Employee email",
+      "type": "email",
+      "required": true
+    },
+    {
+      "key": "system_name",
+      "label": "System or application",
+      "type": "text",
+      "required": true,
+      "max_length": 160
+    },
+    {
+      "key": "access_level",
+      "label": "Requested access level",
+      "type": "select",
+      "required": true,
+      "options": [
+        "Read",
+        "Contribute",
+        "Approve",
+        "Administrator"
+      ]
+    },
+    {
+      "key": "manager_name",
+      "label": "Manager",
+      "type": "text",
+      "required": true,
+      "max_length": 120
+    },
+    {
+      "key": "justification",
+      "label": "Business justification",
+      "type": "textarea",
+      "required": true,
+      "max_length": 1500
+    },
+    {
+      "key": "end_date",
+      "label": "Access expiration date",
+      "type": "date",
+      "required": false
+    }
+  ],
+  "stages": [
+    {
+      "key": "submitted",
+      "label": "Submitted",
+      "description": "Request received.",
+      "default_role": "Access Coordinator",
+      "sla_hours": 8
+    },
+    {
+      "key": "manager_approval",
+      "label": "Manager Approval",
+      "description": "The requester's manager confirms business need.",
+      "default_role": "Manager",
+      "sla_hours": 24,
+      "approvals": [
+        {
+          "key": "manager_decision",
+          "name": "Manager approval",
+          "assigned_role": "Manager"
+        }
+      ]
+    },
+    {
+      "key": "security_review",
+      "label": "Security Review",
+      "description": "Access scope and segregation-of-duties concerns are reviewed.",
+      "default_role": "Security Reviewer",
+      "sla_hours": 24,
+      "required_skills": [
+        "security_review"
+      ]
+    },
+    {
+      "key": "provisioning",
+      "label": "Provisioning",
+      "description": "Approved access is implemented and evidenced.",
+      "default_role": "IT Provisioner",
+      "sla_hours": 24
+    },
+    {
+      "key": "completed",
+      "label": "Completed",
+      "description": "Access is active and documented.",
+      "terminal": true
+    },
+    {
+      "key": "rejected",
+      "label": "Rejected",
+      "description": "The request was declined.",
+      "terminal": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "submitted",
+      "to": "manager_approval",
+      "label": "Request manager approval",
+      "roles": [
+        "Access Coordinator",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "manager_approval",
+      "to": "security_review",
+      "label": "Send to security",
+      "roles": [
+        "Manager",
+        "Administrator"
+      ],
+      "requires_approvals": true
+    },
+    {
+      "from": "manager_approval",
+      "to": "rejected",
+      "label": "Close as rejected",
+      "roles": [
+        "Manager",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "security_review",
+      "to": "provisioning",
+      "label": "Approve for provisioning",
+      "roles": [
+        "Security Reviewer",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "security_review",
+      "to": "rejected",
+      "label": "Reject access",
+      "roles": [
+        "Security Reviewer",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "provisioning",
+      "to": "completed",
+      "label": "Confirm access",
+      "roles": [
+        "IT Provisioner",
+        "Administrator"
+      ]
+    }
+  ],
+  "business_calendar": {
+    "timezone": "America/Chicago",
+    "business_days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "start": "08:00",
+    "end": "17:00",
+    "holidays": [
+      "2026-01-01",
+      "2026-05-25",
+      "2026-07-03",
+      "2026-09-07",
+      "2026-11-26",
+      "2026-12-25"
+    ]
+  },
+  "sla_warning_hours": 4,
+  "escalation": {
+    "1": {
+      "notify_roles": [
+        "Administrator"
+      ],
+      "reassign_role": ""
+    },
+    "2": {
+      "notify_roles": [
+        "Administrator",
+        "Case Manager"
+      ],
+      "reassign_role": "Case Manager"
+    }
+  },
+  "rule_sets": [
+    "access_risk"
+  ]
+}

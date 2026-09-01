@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Workflow Studio · {{ app_name }}{% endblock %}
+{% block content %}
+<header class="page-header"><div><span class="eyebrow">Low-code governance</span><h1>Workflow Studio</h1><p>Configure executable workflows, reusable decision rules, connectors, and requester knowledge without creating parallel application logic.</p></div></header>
+<div class="metric-grid compact-grid">
+  <article class="metric-card"><span>Workflows</span><strong>{{ workflows|length }}</strong><small>Published process definitions</small></article>
+  <article class="metric-card"><span>Rule sets</span><strong>{{ rules|length }}</strong><small>Reusable policy modules</small></article>
+  <article class="metric-card"><span>Connectors</span><strong>{{ connectors|length }}</strong><small>Durable integration adapters</small></article>
+  <article class="metric-card"><span>Knowledge</span><strong>{{ articles|length }}</strong><small>Requester guidance articles</small></article>
+</div>
+<div class="content-grid two-column">
+<section class="panel"><div class="panel-heading"><div><span class="eyebrow">Process design</span><h2>Published workflows</h2></div></div>
+  <div class="stack-list">{% for item in workflows %}<a class="list-row" href="/studio/workflows/{{ item.key }}"><div><strong>{{ item.name }}</strong><small>{{ item.key }} · v{{ item.version }} · {{ 'Active' if item.active else 'Inactive' }}</small></div><span>Open studio →</span></a>{% endfor %}</div>
+</section>
+<section class="panel"><div class="panel-heading"><div><span class="eyebrow">Business policy</span><h2>Decision rules</h2></div><a class="button button-secondary" href="/studio/rules">Rules Studio</a></div>
+  <div class="stack-list">{% for item in rules %}<div class="list-row"><div><strong>{{ item.name }}</strong><small>{{ item.key }} · v{{ item.version }}</small></div><span class="badge">{{ 'Active' if item.active else 'Inactive' }}</span></div>{% endfor %}</div>
+</section>
+<section class="panel"><div class="panel-heading"><div><span class="eyebrow">Integration</span><h2>Connector registry</h2></div><a class="button button-secondary" href="/studio/connectors">Manage connectors</a></div>
+  <div class="stack-list">{% for item in connectors %}<div class="list-row"><div><strong>{{ item.name }}</strong><small>{{ item.kind }} · {{ item.key }}</small></div><span class="badge">{{ 'Enabled' if item.enabled else 'Disabled' }}</span></div>{% endfor %}</div>
+</section>
+<section class="panel"><div class="panel-heading"><div><span class="eyebrow">Self-service</span><h2>Knowledge base</h2></div></div>
+  <div class="stack-list">{% for item in articles %}<div class="list-row"><div><strong>{{ item.title }}</strong><small>{{ item.workflow_key or 'General' }} · {{ 'Published' if item.published else 'Draft' }}</small></div></div>{% endfor %}</div>
+  <details class="editor-details"><summary>Add / update article</summary><form class="form-grid" method="post" action="/studio/knowledge/save"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><label>Slug<input name="slug" required></label><label>Title<input name="title" required></label><label>Workflow key<input name="workflow_key"></label><label class="full">Summary<input name="summary"></label><label class="full">Body<textarea name="body" rows="6"></textarea></label><label class="checkbox-row"><input type="checkbox" name="published" checked> Published</label><button class="button button-primary" type="submit">Save article</button></form></details>
+</section>
+</div>
+{% endblock %}

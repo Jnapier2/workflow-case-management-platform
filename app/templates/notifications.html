@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Notifications · {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header split-header"><div><span class="eyebrow">Personal work queue</span><h1>Notifications</h1><p>Assignments, approval requests, decisions, and service-level escalations for {{ actor.name }}.</p></div><form method="post" action="/notifications/read-all"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="button button-secondary" type="submit">Mark all read</button></form></section>
+<section class="panel notification-panel">
+  {% for item in notifications %}<article class="notification-row {% if not item.is_read %}unread{% endif %}"><span class="notification-dot"></span><div><strong>{{ item.message }}</strong><small>{{ item.kind|replace('_',' ')|title }} · {{ item.created_at|datetime }}</small></div>{% if item.case %}<a class="button button-ghost" href="/cases/{{ item.case.reference }}">Open {{ item.case.reference }}</a>{% endif %}{% if not item.is_read %}<form method="post" action="/notifications/{{ item.id }}/read"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="next" value="/notifications"><button class="text-button" type="submit">Mark read</button></form>{% endif %}</article>{% else %}<div class="empty-state"><strong>No notifications for this demo identity.</strong><span>Switch identities to inspect role-specific work queues.</span></div>{% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Workflows · {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header"><span class="eyebrow">Configuration catalog</span><h1>Workflows</h1><p>One engine supports different intake forms, stages, role rules, deadlines, approvals, and outcomes.</p></section>
+<section class="workflow-grid">
+  {% for workflow in workflows %}{% set config = workflow.config_json|safe %}
+    <article class="workflow-card"><div class="workflow-icon">⌘</div><div><span class="eyebrow">Version {{ workflow.version }}</span><h2>{{ workflow.name }}</h2><p>{{ workflow.description }}</p><div class="workflow-card-footer"><span class="pill pill-success">Active</span><a href="/workflows/{{ workflow.key }}">Inspect definition →</a></div></div></article>
+  {% endfor %}
+</section>
+
+<section class="panel import-panel">
+  <div class="panel-heading"><div><span class="eyebrow">Administrator configuration</span><h2>Import or update a workflow</h2><p>Definitions are validated before they replace an active version. Older versions cannot overwrite newer ones.</p></div></div>
+  <div class="example-links"><span>Download examples:</span><a href="/workflows/examples/vendor_onboarding.json">Vendor onboarding</a><a href="/workflows/examples/employee_access_request.json">Employee access</a><a href="/workflows/examples/customer_complaint.json">Customer complaint</a></div>
+  <form class="import-form" method="post" action="/workflows/import" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label class="field full">Paste JSON<textarea name="config_text" rows="12" placeholder='{"key":"contract_review", ...}' {% if actor.role != 'Administrator' %}disabled{% endif %}></textarea></label>
+    <div class="or-divider"><span>or</span></div>
+    <label class="file-drop"><input type="file" name="config_file" accept="application/json,.json" {% if actor.role != 'Administrator' %}disabled{% endif %}><span><strong>Select a JSON definition</strong><small>Maximum 200 KB</small></span></label>
+    <button class="button button-primary" type="submit" {% if actor.role != 'Administrator' %}disabled{% endif %}>Validate and import</button>
+    {% if actor.role != 'Administrator' %}<small class="danger-text">Switch to the Administrator demo identity to import a definition.</small>{% endif %}
+  </form>
+</section>
+{% endblock %}

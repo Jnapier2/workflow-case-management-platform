@@ -1,0 +1,267 @@
+{
+  "binaries_redistributed": false,
+  "components": [
+    {
+      "license": "MIT",
+      "name": "annotated-doc",
+      "purpose": "FastAPI documentation metadata",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "0.0.4"
+    },
+    {
+      "license": "MIT",
+      "name": "annotated-types",
+      "purpose": "Pydantic annotated constraints",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "0.7.0"
+    },
+    {
+      "license": "MIT",
+      "name": "anyio",
+      "purpose": "Async compatibility layer",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "4.13.0"
+    },
+    {
+      "license": "MPL-2.0",
+      "name": "certifi",
+      "purpose": "Certificate authority bundle for HTTPX",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "2026.5.20"
+    },
+    {
+      "license": "BSD-3-Clause",
+      "name": "click",
+      "purpose": "Uvicorn command support",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "8.1.8"
+    },
+    {
+      "license": "BSD-3-Clause",
+      "name": "colorama",
+      "purpose": "Windows terminal compatibility",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "0.4.6"
+    },
+    {
+      "license": "MIT",
+      "name": "exceptiongroup",
+      "purpose": "Python 3.10 compatibility",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "1.3.0"
+    },
+    {
+      "license": "MIT",
+      "name": "fastapi",
+      "purpose": "Web application and REST API framework",
+      "scope": "runtime",
+      "source": "PyPI",
+      "version": "0.141.1"
+    },
+    {
+      "license": "MIT",
+      "name": "greenlet",
+      "purpose": "SQLAlchemy execution support",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "3.5.1"
+    },
+    {
+      "license": "MIT",
+      "name": "h11",
+      "purpose": "HTTP/1.1 protocol implementation",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "0.16.0"
+    },
+    {
+      "license": "BSD-3-Clause",
+      "name": "httpcore",
+      "purpose": "HTTPX transport layer",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "1.0.9"
+    },
+    {
+      "license": "BSD-3-Clause",
+      "name": "httpx",
+      "purpose": "OIDC, HTTPS connector/external advisory transport, and test client",
+      "scope": "runtime",
+      "source": "PyPI",
+      "version": "0.28.1"
+    },
+    {
+      "license": "BSD-3-Clause",
+      "name": "idna",
+      "purpose": "Internationalized domain handling",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "3.17"
+    },
+    {
+      "license": "MIT",
+      "name": "iniconfig",
+      "purpose": "pytest configuration",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "2.3.0"
+    },
+    {
+      "license": "BSD-3-Clause",
+      "name": "itsdangerous",
+      "purpose": "Signed local demo sessions",
+      "scope": "runtime",
+      "source": "PyPI",
+      "version": "2.2.0"
+    },
+    {
+      "license": "BSD-3-Clause",
+      "name": "Jinja2",
+      "purpose": "Server-rendered HTML templates",
+      "scope": "runtime",
+      "source": "PyPI",
+      "version": "3.1.6"
+    },
+    {
+      "license": "BSD-3-Clause",
+      "name": "MarkupSafe",
+      "purpose": "Jinja2 escaping",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "3.0.3"
+    },
+    {
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "name": "packaging",
+      "purpose": "Version and requirement handling",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "25.0"
+    },
+    {
+      "license": "MIT",
+      "name": "pluggy",
+      "purpose": "pytest plugin system",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "1.6.0"
+    },
+    {
+      "license": "LGPL-3.0-only",
+      "name": "psycopg",
+      "purpose": "PostgreSQL adapter for the production-shaped persistence path",
+      "scope": "optional-runtime",
+      "source": "PyPI",
+      "version": "3.3.4"
+    },
+    {
+      "license": "LGPL-3.0-only",
+      "name": "psycopg-binary",
+      "purpose": "Optimized binary distribution installed by the Psycopg binary extra",
+      "scope": "optional-runtime",
+      "source": "PyPI",
+      "version": "3.3.4"
+    },
+    {
+      "license": "MIT",
+      "name": "pydantic",
+      "purpose": "FastAPI data validation",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "2.13.4"
+    },
+    {
+      "license": "MIT",
+      "name": "pydantic_core",
+      "purpose": "Pydantic validation engine",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "2.46.4"
+    },
+    {
+      "license": "BSD-2-Clause",
+      "name": "Pygments",
+      "purpose": "pytest terminal output",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "2.20.0"
+    },
+    {
+      "license": "MIT",
+      "name": "pytest",
+      "purpose": "Automated test runner",
+      "scope": "test",
+      "source": "PyPI",
+      "version": "9.0.2"
+    },
+    {
+      "license": "Apache-2.0",
+      "name": "python-multipart",
+      "purpose": "Form and attachment parsing",
+      "scope": "runtime",
+      "source": "PyPI",
+      "version": "0.0.32"
+    },
+    {
+      "license": "MIT",
+      "name": "SQLAlchemy",
+      "purpose": "Database mapping and queries",
+      "scope": "runtime",
+      "source": "PyPI",
+      "version": "2.0.52"
+    },
+    {
+      "license": "BSD-3-Clause",
+      "name": "starlette",
+      "purpose": "FastAPI web foundation",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "0.50.0"
+    },
+    {
+      "license": "MIT",
+      "name": "tomli",
+      "purpose": "Python 3.10 TOML support",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "2.3.0"
+    },
+    {
+      "license": "MIT",
+      "name": "typing-inspection",
+      "purpose": "Pydantic/FastAPI typing inspection",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "0.4.2"
+    },
+    {
+      "license": "PSF-2.0",
+      "name": "typing_extensions",
+      "purpose": "Cross-version typing support",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "4.16.0"
+    },
+    {
+      "license": "BSD-3-Clause",
+      "name": "uvicorn",
+      "purpose": "Local ASGI server",
+      "scope": "runtime",
+      "source": "PyPI",
+      "version": "0.52.4"
+    }
+  ],
+  "dependency_lock": "requirements.lock.txt",
+  "format": "Gateway compact SBOM",
+  "lock_scope": "exact direct and transitive runtime/test versions",
+  "project": "gateway.workflow_case_management",
+  "schema_version": "1.1",
+  "version": "0.5.2"
+}

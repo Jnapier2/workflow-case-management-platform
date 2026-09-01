@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Cases · {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header split-header">
+  <div><span class="eyebrow">Case queue</span><h1>Cases</h1><p>Filter, prioritize, and open requests across every configured process.</p></div>
+  <a class="button button-primary" href="/cases/new">Create a case</a>
+</section>
+
+<form class="filter-panel" method="get" action="/cases">
+  <label>Search<input type="search" name="q" value="{{ filters.q }}" placeholder="Reference, title, requester"></label>
+  <label>Workflow<select name="workflow"><option value="">All workflows</option>{% for item in workflows %}<option value="{{ item.id }}" {% if filters.workflow == item.id %}selected{% endif %}>{{ item.name }}</option>{% endfor %}</select></label>
+  <label>Status<select name="status"><option value="">All statuses</option>{% for key, label in status_options %}<option value="{{ key }}" {% if filters.status == key %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+  <label>Priority<select name="priority"><option value="">All priorities</option>{% for item in priorities %}<option value="{{ item }}" {% if filters.priority == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></label>
+  <label>Assignee<select name="assignee"><option value="">All owners</option>{% for user in demo_users %}<option value="{{ user.id }}" {% if filters.assignee == user.id %}selected{% endif %}>{{ user.name }}</option>{% endfor %}</select></label>
+  <div class="filter-actions"><button class="button button-primary" type="submit">Apply</button><a class="button button-ghost" href="/cases">Reset</a></div>
+</form>
+
+<section class="panel">
+  <div class="panel-heading"><div><h2>{{ pagination.total }} matching case{% if pagination.total != 1 %}s{% endif %}</h2><p>{% if pagination.total %}Showing {{ pagination.start }}–{{ pagination.end }}{% else %}No results{% endif %}</p></div></div>
+  {% if cases %}
+  <div class="table-wrap"><table class="data-table case-table">
+    <thead><tr><th>Case</th><th>Workflow</th><th>Status</th><th>Priority</th><th>Owner</th><th>Stage deadline</th></tr></thead>
+    <tbody>{% for case in cases %}{% set view = case_to_dict(case, include_fields=false) %}
+      <tr>
+        <td><a class="table-link" href="/cases/{{ case.reference }}"><span>{{ case.reference }}</span><strong>{{ case.title }}</strong><small>{{ case.requester_name }}</small></a></td>
+        <td>{{ case.workflow.name }}</td>
+        <td><span class="pill pill-neutral">{{ view.status_label }}</span>{% if view.stage_overdue or view.overall_overdue %}<small class="danger-text">Overdue</small>{% endif %}</td>
+        <td><span class="pill pill-{{ case.priority|lower }}">{{ case.priority }}</span></td>
+        <td>{% if case.assignee %}<strong>{{ case.assignee.name }}</strong><small>{{ case.assignee.role }}</small>{% else %}<span class="muted">Unassigned</span>{% endif %}</td>
+        <td><span class="{% if view.stage_overdue %}danger-text{% endif %}">{{ case.stage_due_at|deadline }}</span><small>{{ case.stage_due_at|datetime }}</small></td>
+      </tr>
+    {% endfor %}</tbody>
+  </table></div>
+  {% if pagination.total_pages > 1 %}
+  <nav class="pagination" aria-label="Case pages">
+    <div>{% if pagination.previous_url %}<a class="button button-ghost" href="{{ pagination.previous_url }}">Previous</a>{% endif %}</div>
+    <span>Page {{ pagination.page }} of {{ pagination.total_pages }}</span>
+    <div>{% if pagination.next_url %}<a class="button button-ghost" href="{{ pagination.next_url }}">Next</a>{% endif %}</div>
+  </nav>
+  {% endif %}
+  {% else %}<div class="empty-state"><strong>No cases match these filters.</strong><span>Reset the filters or create a new case.</span></div>{% endif %}
+</section>
+{% endblock %}

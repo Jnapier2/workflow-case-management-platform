@@ -1,0 +1,283 @@
+{
+  "key": "vendor_onboarding",
+  "name": "Vendor Onboarding",
+  "version": 2,
+  "description": "Validates a prospective vendor, routes risk and financial reviews, records evidence, and completes contracting.",
+  "reference_prefix": "VEN",
+  "initial_stage": "submitted",
+  "total_sla_hours": 240,
+  "fields": [
+    {
+      "key": "vendor_name",
+      "label": "Vendor name",
+      "type": "text",
+      "required": true,
+      "max_length": 160
+    },
+    {
+      "key": "service_category",
+      "label": "Service category",
+      "type": "select",
+      "required": true,
+      "options": [
+        "Professional Services",
+        "Software",
+        "Logistics",
+        "Facilities",
+        "Marketing"
+      ]
+    },
+    {
+      "key": "annual_spend",
+      "label": "Estimated annual spend",
+      "type": "number",
+      "required": true,
+      "minimum": 0
+    },
+    {
+      "key": "handles_personal_data",
+      "label": "Handles personal or confidential data",
+      "type": "checkbox",
+      "required": false
+    },
+    {
+      "key": "country",
+      "label": "Primary operating country",
+      "type": "select",
+      "required": true,
+      "options": [
+        "United States",
+        "Canada",
+        "United Kingdom",
+        "Germany",
+        "India",
+        "Other"
+      ]
+    },
+    {
+      "key": "business_owner",
+      "label": "Internal business owner",
+      "type": "text",
+      "required": true,
+      "max_length": 120
+    },
+    {
+      "key": "requested_start_date",
+      "label": "Requested start date",
+      "type": "date",
+      "required": true
+    },
+    {
+      "key": "risk_notes",
+      "label": "Known risks or special requirements",
+      "type": "textarea",
+      "required": false,
+      "max_length": 1500
+    }
+  ],
+  "stages": [
+    {
+      "key": "submitted",
+      "label": "Submitted",
+      "description": "Request received and awaiting intake review.",
+      "default_role": "Case Manager",
+      "sla_hours": 24
+    },
+    {
+      "key": "validation",
+      "label": "Intake Validation",
+      "description": "Required information and evidence are checked.",
+      "default_role": "Case Manager",
+      "sla_hours": 24
+    },
+    {
+      "key": "due_diligence",
+      "label": "Due Diligence",
+      "description": "Risk, privacy, and operational considerations are investigated.",
+      "default_role": "Risk Reviewer",
+      "sla_hours": 72,
+      "required_skills": [
+        "vendor_risk"
+      ]
+    },
+    {
+      "key": "approvals",
+      "label": "Approvals",
+      "description": "Conditional procurement, data-risk, and finance decisions are recorded.",
+      "default_role": "Procurement Analyst",
+      "sla_hours": 48,
+      "approvals": [
+        {
+          "key": "procurement_review",
+          "name": "Procurement review",
+          "assigned_role": "Procurement Analyst"
+        },
+        {
+          "key": "data_risk_review",
+          "name": "Information-risk review",
+          "assigned_role": "Risk Reviewer",
+          "condition": {
+            "field": "handles_personal_data",
+            "operator": "truthy"
+          }
+        },
+        {
+          "key": "finance_approval",
+          "name": "Finance approval",
+          "assigned_role": "Finance Approver",
+          "condition": {
+            "field": "annual_spend",
+            "operator": "gte",
+            "value": 50000
+          }
+        }
+      ]
+    },
+    {
+      "key": "contracting",
+      "label": "Contracting",
+      "description": "Final terms and execution evidence are completed.",
+      "default_role": "Procurement Analyst",
+      "sla_hours": 72
+    },
+    {
+      "key": "completed",
+      "label": "Completed",
+      "description": "Vendor onboarding is complete.",
+      "terminal": true
+    },
+    {
+      "key": "rejected",
+      "label": "Rejected",
+      "description": "The request was declined with a recorded reason.",
+      "terminal": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "submitted",
+      "to": "validation",
+      "label": "Begin validation",
+      "roles": [
+        "Case Manager",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "validation",
+      "to": "due_diligence",
+      "label": "Send to due diligence",
+      "roles": [
+        "Case Manager",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "validation",
+      "to": "rejected",
+      "label": "Reject request",
+      "roles": [
+        "Case Manager",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "due_diligence",
+      "to": "approvals",
+      "label": "Request approvals",
+      "roles": [
+        "Risk Reviewer",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "due_diligence",
+      "to": "rejected",
+      "label": "Reject after review",
+      "roles": [
+        "Risk Reviewer",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "approvals",
+      "to": "contracting",
+      "label": "Proceed to contracting",
+      "roles": [
+        "Procurement Analyst",
+        "Administrator"
+      ],
+      "requires_approvals": true
+    },
+    {
+      "from": "approvals",
+      "to": "rejected",
+      "label": "Close as rejected",
+      "roles": [
+        "Procurement Analyst",
+        "Administrator"
+      ]
+    },
+    {
+      "from": "contracting",
+      "to": "completed",
+      "label": "Complete onboarding",
+      "roles": [
+        "Procurement Analyst",
+        "Administrator"
+      ],
+      "requires_children_complete": true,
+      "connector_actions": [
+        "portfolio_audit_log"
+      ]
+    },
+    {
+      "from": "contracting",
+      "to": "rejected",
+      "label": "Terminate onboarding",
+      "roles": [
+        "Procurement Analyst",
+        "Administrator"
+      ]
+    }
+  ],
+  "business_calendar": {
+    "timezone": "America/Chicago",
+    "business_days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "start": "08:00",
+    "end": "17:00",
+    "holidays": [
+      "2026-01-01",
+      "2026-05-25",
+      "2026-07-03",
+      "2026-09-07",
+      "2026-11-26",
+      "2026-12-25"
+    ]
+  },
+  "sla_warning_hours": 4,
+  "escalation": {
+    "1": {
+      "notify_roles": [
+        "Administrator"
+      ],
+      "reassign_role": ""
+    },
+    "2": {
+      "notify_roles": [
+        "Administrator",
+        "Case Manager"
+      ],
+      "reassign_role": "Case Manager"
+    }
+  },
+  "rule_sets": [
+    "vendor_risk"
+  ]
+}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Management Dashboard · {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header split-header">
+  <div>
+    <span class="eyebrow">Operational oversight</span>
+    <h1>Management dashboard</h1>
+    <p>See workload, approvals, service-level risk, and process bottlenecks across every configured workflow.</p>
+  </div>
+  <a class="button button-primary" href="/cases/new">Create a case</a>
+</section>
+
+<section class="metric-grid" aria-label="Key performance indicators">
+  <article class="metric-card">
+    <span class="metric-label">Open cases</span><strong>{{ dashboard.metrics.open_cases }}</strong><small>Across active workflows</small>
+  </article>
+  <article class="metric-card {% if dashboard.metrics.overdue_cases %}metric-alert{% endif %}">
+    <span class="metric-label">Overdue</span><strong>{{ dashboard.metrics.overdue_cases }}</strong><small>Stage or overall deadline</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Due within 48h</span><strong>{{ dashboard.metrics.due_soon }}</strong><small>Near-term attention</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Pending approvals</span><strong>{{ dashboard.metrics.pending_approvals }}</strong><small>Recorded decisions needed</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Completed in 30d</span><strong>{{ dashboard.metrics.completed_30d }}</strong><small>Terminal outcomes</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">SLA compliance</span><strong>{% if dashboard.metrics.sla_compliance_pct is not none %}{{ dashboard.metrics.sla_compliance_pct }}%{% else %}—{% endif %}</strong><small>Measured closed cases</small>
+  </article>
+</section>
+
+<div class="dashboard-grid">
+  <section class="panel">
+    <div class="panel-heading"><div><span class="eyebrow">Demand</span><h2>Open cases by workflow</h2></div><a href="/cases">View cases</a></div>
+    {% if dashboard.workflow_open %}
+      <div class="bar-list">
+      {% for item in dashboard.workflow_open %}
+        <div class="bar-row">
+          <div class="bar-label"><span>{{ item.workflow }}</span><strong>{{ item.count }}</strong></div>
+          <div class="bar-track"><span style="width: {{ [item.count * 18, 100] | min }}%"></span></div>
+        </div>
+      {% endfor %}
+      </div>
+    {% else %}<div class="empty-state compact">No open cases.</div>{% endif %}
+  </section>
+
+  <section class="panel">
+    <div class="panel-heading"><div><span class="eyebrow">Accountability</span><h2>Workload by owner</h2></div></div>
+    {% if dashboard.workload %}
+    <div class="table-wrap"><table class="data-table compact-table">
+      <thead><tr><th>Owner</th><th>Open</th><th>Overdue</th></tr></thead>
+      <tbody>{% for item in dashboard.workload %}
+        <tr><td><strong>{{ item.name }}</strong><small>{{ item.role }}</small></td><td>{{ item.open }}</td><td>{% if item.overdue %}<span class="pill pill-danger">{{ item.overdue }}</span>{% else %}0{% endif %}</td></tr>
+      {% endfor %}</tbody>
+    </table></div>
+    {% else %}<div class="empty-state compact">No assigned cases.</div>{% endif %}
+  </section>
+</div>
+
+<section class="panel">
+  <div class="panel-heading"><div><span class="eyebrow">Process intelligence</span><h2>Bottleneck analysis</h2><p>Ranked by stage age, target duration, volume, and overdue count.</p></div></div>
+  {% if dashboard.bottlenecks %}
+  <div class="table-wrap"><table class="data-table">
+    <thead><tr><th>Workflow</th><th>Stage</th><th>Cases</th><th>Average age</th><th>Target</th><th>Overdue</th></tr></thead>
+    <tbody>{% for item in dashboard.bottlenecks %}
+      <tr>
+        <td>{{ item.workflow }}</td><td><strong>{{ item.stage }}</strong></td><td>{{ item.count }}</td>
+        <td>{{ item.average_age_hours }}h</td><td>{% if item.target_hours %}{{ item.target_hours|int }}h{% else %}—{% endif %}</td>
+        <td>{% if item.overdue_count %}<span class="pill pill-danger">{{ item.overdue_count }}</span>{% else %}<span class="pill pill-success">0</span>{% endif %}</td>
+      </tr>
+    {% endfor %}</tbody>
+  </table></div>
+  {% else %}<div class="empty-state">No active-stage data is available.</div>{% endif %}
+</section>
+
+<section class="panel">
+  <div class="panel-heading"><div><span class="eyebrow">Recent activity</span><h2>Recently updated cases</h2></div><a href="/cases">Open case queue</a></div>
+  <div class="case-card-list">
+    {% for case in dashboard.recent_cases %}
+      <a class="case-row" href="/cases/{{ case.reference }}">
+        <div><span class="case-ref">{{ case.reference }}</span><strong>{{ case.title }}</strong><small>{{ case.workflow.name }} · {{ case.requester_name }}</small></div>
+        <div class="case-row-meta"><span class="pill pill-{{ case.priority|lower }}">{{ case.priority }}</span><span>{{ case.status|replace('_',' ')|title }}</span></div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

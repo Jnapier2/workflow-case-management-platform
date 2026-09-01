@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}New Case · {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <span class="eyebrow">Configurable intake</span><h1>Create a case</h1><p>Select a workflow, complete its validated intake form, and let the routing rules assign the first owner and deadlines.</p>
+</section>
+
+<div class="form-layout">
+  <div>
+    <section class="panel">
+      <form class="workflow-picker" method="get" action="/cases/new">
+        <label for="workflow-select">Workflow template</label>
+        <select id="workflow-select" name="workflow" data-auto-submit>
+          {% for item in workflows %}<option value="{{ item.key }}" {% if selected_workflow and selected_workflow.id == item.id %}selected{% endif %}>{{ item.name }}</option>{% endfor %}
+        </select>
+        {% if selected_workflow %}<p>{{ selected_workflow.description }}</p>{% endif %}
+      </form>
+    </section>
+
+    {% if errors %}<div class="error-summary" role="alert"><strong>Correct the following:</strong><ul>{% for error in errors %}<li>{{ error }}</li>{% endfor %}</ul></div>{% endif %}
+
+    {% if selected_workflow %}
+    <form class="panel form-card" method="post" action="/cases">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="workflow_key" value="{{ selected_workflow.key }}">
+      <div class="section-heading"><span class="step-number">1</span><div><h2>Request summary</h2><p>Information shared by every workflow.</p></div></div>
+      <div class="form-grid two-column">
+        <label class="field full">Case title<span class="required">Required</span><input name="title" maxlength="240" required value="{{ form_values.get('title','') }}" placeholder="Clear, outcome-oriented title"></label>
+        <label class="field">Requester name<span class="required">Required</span><input name="requester_name" maxlength="160" required value="{{ form_values.get('requester_name','') }}"></label>
+        <label class="field">Requester email<span class="required">Required</span><input type="email" name="requester_email" maxlength="200" required value="{{ form_values.get('requester_email','') }}"></label>
+        <label class="field">Priority<span class="required">Required</span><select name="priority">{% for item in priorities %}<option value="{{ item }}" {% if form_values.get('priority','Medium') == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></label>
+        <label class="field full">Description<textarea name="description" rows="4" maxlength="5000" placeholder="Context, requested outcome, and relevant constraints">{{ form_values.get('description','') }}</textarea></label>
+      </div>
+
+      <div class="section-heading"><span class="step-number">2</span><div><h2>{{ selected_workflow.name }} intake</h2><p>Fields are rendered from the active workflow configuration.</p></div></div>
+      <div class="form-grid two-column">
+        {% for field in workflow_config.fields %}{% set name = 'field__' ~ field.key %}{% set value = form_values.get(name,'') %}
+          {% if field.type == 'textarea' %}
+            <label class="field full">{{ field.label }}{% if field.required %}<span class="required">Required</span>{% endif %}<textarea name="{{ name }}" rows="4" maxlength="{{ field.max_length or 4000 }}" {% if field.required %}required{% endif %}>{{ value }}</textarea></label>
+          {% elif field.type == 'select' %}
+            <label class="field">{{ field.label }}{% if field.required %}<span class="required">Required</span>{% endif %}<select name="{{ name }}" {% if field.required %}required{% endif %}><option value="">Select</option>{% for option in field.options %}<option value="{{ option }}" {% if value == option %}selected{% endif %}>{{ option }}</option>{% endfor %}</select></label>
+          {% elif field.type == 'checkbox' %}
+            <label class="checkbox-field full"><input type="checkbox" name="{{ name }}" value="true" {% if value in ['true','on','1',true] %}checked{% endif %}><span><strong>{{ field.label }}</strong>{% if field.help %}<small>{{ field.help }}</small>{% endif %}</span></label>
+          {% else %}
+            <label class="field">{{ field.label }}{% if field.required %}<span class="required">Required</span>{% endif %}<input type="{% if field.type == 'number' %}number{% elif field.type == 'date' %}date{% elif field.type == 'email' %}email{% else %}text{% endif %}" name="{{ name }}" value="{{ value }}" {% if field.minimum is defined %}min="{{ field.minimum }}"{% endif %} {% if field.maximum is defined %}max="{{ field.maximum }}"{% endif %} {% if field.max_length is defined %}maxlength="{{ field.max_length }}"{% endif %} {% if field.required %}required{% endif %}></label>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="form-actions"><a class="button button-ghost" href="/cases">Cancel</a><button class="button button-primary" type="submit">Create and route case</button></div>
+    </form>
+    {% endif %}
+  </div>
+
+  <aside class="panel explainer-card">
+    <span class="eyebrow">What happens next</span><h2>Rules execute immediately</h2>
+    <ol class="numbered-list">
+      <li><span>1</span><div><strong>Validate</strong><small>Required fields, data types, options, and numeric limits are enforced.</small></div></li>
+      <li><span>2</span><div><strong>Route</strong><small>The least-loaded active user in the configured role receives the case.</small></div></li>
+      <li><span>3</span><div><strong>Measure</strong><small>Stage and overall service-level deadlines are calculated.</small></div></li>
+      <li><span>4</span><div><strong>Audit</strong><small>Creation, assignment, and every later action enter the tamper-evident history.</small></div></li>
+    </ol>
+  </aside>
+</div>
+{% endblock %}
