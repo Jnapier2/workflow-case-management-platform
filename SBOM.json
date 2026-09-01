@@ -199,7 +199,7 @@
       "purpose": "Automated test runner",
       "scope": "test",
       "source": "PyPI",
-      "version": "9.0.2"
+      "version": "9.1.1"
     },
     {
       "license": "Apache-2.0",
@@ -223,7 +223,7 @@
       "purpose": "FastAPI web foundation",
       "scope": "transitive",
       "source": "PyPI",
-      "version": "0.50.0"
+      "version": "1.6.0"
     },
     {
       "license": "MIT",

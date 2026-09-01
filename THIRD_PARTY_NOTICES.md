@@ -28,10 +28,10 @@ This source release does not redistribute third-party source trees or binary dep
 | Pygments | 2.20.0 | BSD-2-Clause | pytest terminal output |
 | psycopg | 3.3.4 | LGPL-3.0-only | Optional PostgreSQL adapter for the production-shaped persistence path |
 | psycopg-binary | 3.3.4 | LGPL-3.0-only | Optimized binary implementation installed by the optional Psycopg binary extra |
-| pytest | 9.0.2 | MIT | Automated test runner |
+| pytest | 9.1.1 | MIT | Automated test runner |
 | python-multipart | 0.0.32 | Apache-2.0 | Form and attachment parsing |
 | SQLAlchemy | 2.0.52 | MIT | Database mapping and queries |
-| starlette | 0.50.0 | BSD-3-Clause | FastAPI web foundation |
+| starlette | 1.6.0 | BSD-3-Clause | FastAPI web foundation |
 | tomli | 2.3.0 | MIT | Python 3.10 TOML support |
 | typing_extensions | 4.16.0 | PSF-2.0 | Cross-version typing support |
 | typing-inspection | 0.4.2 | MIT | Pydantic/FastAPI typing inspection |

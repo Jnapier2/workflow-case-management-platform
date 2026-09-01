@@ -444,7 +444,7 @@
     },
     {
       "path": "PACKAGE_METADATA.json",
-      "sha256": "7622465148527CEDDC609EB9F40D130CC4626E4E6AC3FC99EB1CE0199AC451F8",
+      "sha256": "3A08BFF50FF24CD95878047FEED8AB29BE095C9E2B133B4EBD7D51EFD9305DA7",
       "size": 6517
     },
     {
@@ -454,18 +454,18 @@
     },
     {
       "path": "requirements.lock.txt",
-      "sha256": "704A37E4A048EE9445E68E0CD9B943B3D83D9F5A1AED4C99AD9482F74F706DE7",
-      "size": 800
+      "sha256": "A6D1A9DF4586D6934B29009A478903E4DD9052B93B8C0FDBB0FA15FC57C506D7",
+      "size": 799
     },
     {
       "path": "requirements.txt",
-      "sha256": "60DD064D00077FD555E78902E88189F6BE2D57E9D4D432B7CF17BEE9F8968493",
+      "sha256": "F521F8A257CD39BD75308D355EE4C0A45A032C727D33C57E45822685B5EA4ABB",
       "size": 162
     },
     {
       "path": "SBOM.json",
-      "sha256": "2BCCC25A56C1111DE6EB82FCBE731479BE32E245CEA95A25490B0CFF68C0FAFD",
-      "size": 6647
+      "sha256": "BD70DCAEB15FDB19F0AEF6F8AEE1A02F66771F0F0CE826FBA9B2CABAF6BB497C",
+      "size": 6646
     },
     {
       "path": "scripts/bootstrap.py",
@@ -604,8 +604,8 @@
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "sha256": "FBBC1719978EE28489503AE302E4DFBEF365E407E37143686B1D8B5D755A0DA7",
-      "size": 2799
+      "sha256": "7C5B7FAA21F4543B0C3FDCBC106959585EA24941B2572AB457FCBFBAE44ABECC",
+      "size": 2798
     },
     {
       "path": "VERSION.txt",
@@ -613,7 +613,7 @@
       "size": 22
     }
   ],
-  "generated_utc": "2026-09-01T06:56:12.309096Z",
+  "generated_utc": "2026-09-01T07:05:01.093085Z",
   "hash_algorithm": "SHA-256",
   "managed_file_count": 122,
   "package_id": "gateway.workflow_case_management",
