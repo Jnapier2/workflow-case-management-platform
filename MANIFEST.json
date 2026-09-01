@@ -3,6 +3,11 @@
   "display_name": "Workflow & Case Management Platform",
   "files": [
     {
+      "path": ".gitattributes",
+      "sha256": "705FD4D6451A31D36B3DF7DE96F83F30AC976C9B4A6D1E51671D8E2F33E2D0DA",
+      "size": 8
+    },
+    {
       "path": ".gitignore",
       "sha256": "C049ACC47311738936C0517AACA14D5153C715759CFB387075769D2D0215B611",
       "size": 470
@@ -439,7 +444,7 @@
     },
     {
       "path": "PACKAGE_METADATA.json",
-      "sha256": "F8A0E778E8FEDD6C680AF3E196669C7128545223C18715AD19AE38DDB4774696",
+      "sha256": "7622465148527CEDDC609EB9F40D130CC4626E4E6AC3FC99EB1CE0199AC451F8",
       "size": 6517
     },
     {
@@ -608,9 +613,9 @@
       "size": 22
     }
   ],
-  "generated_utc": "2026-09-01T06:47:29.360966Z",
+  "generated_utc": "2026-09-01T06:56:12.309096Z",
   "hash_algorithm": "SHA-256",
-  "managed_file_count": 121,
+  "managed_file_count": 122,
   "package_id": "gateway.workflow_case_management",
   "path_rules": "root-relative, forward-slash, case-insensitive collision rejection, no symlinks",
   "schema": "gateway-managed-file-manifest-1",
