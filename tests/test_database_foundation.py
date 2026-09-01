@@ -100,7 +100,7 @@ def test_schema_four_adds_enterprise_user_identity_columns_without_rewriting_use
                 created_at TIMESTAMP NOT NULL
             );
             INSERT INTO users(id,name,email,role,active,created_at)
-            VALUES (1,'Existing User','existing@example.test','Case Manager',1,CURRENT_TIMESTAMP);
+            VALUES (1,'Existing User','existing@example.com','Case Manager',1,CURRENT_TIMESTAMP);
             PRAGMA user_version = 4;
             """
         )
@@ -112,7 +112,7 @@ def test_schema_four_adds_enterprise_user_identity_columns_without_rewriting_use
             existing = connection.exec_driver_sql("SELECT name,email,role,capacity,skills_json,oidc_issuer,oidc_subject FROM users WHERE id=1").one()
             indexes = {row[1] for row in connection.exec_driver_sql("PRAGMA index_list(users)").all()}
         assert {"capacity", "skills_json", "oidc_issuer", "oidc_subject"}.issubset(columns)
-        assert tuple(existing[:5]) == ("Existing User", "existing@example.test", "Case Manager", 10, "[]")
+        assert tuple(existing[:5]) == ("Existing User", "existing@example.com", "Case Manager", 10, "[]")
         assert existing[5] is None and existing[6] is None
         assert "uq_user_oidc_identity" in indexes
     finally:

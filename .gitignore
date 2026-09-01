@@ -20,12 +20,6 @@ uploads/*
 exports/*
 !exports/.gitkeep
 diagnostics/*
-!diagnostics/crash_capsules/
-!diagnostics/crash_capsules/.gitkeep
-!diagnostics/exports/
-!diagnostics/exports/.gitkeep
-!diagnostics/temp/
-!diagnostics/temp/.gitkeep
 reports/*
 !reports/.gitkeep
 backups/*

@@ -1,11 +1,10 @@
 # Current Qualification / Rollback State
 
-## Forward repair candidate
+## Current release
 
 - Version: **0.5.2**
 - Build: **WCM-B009**
-- Status: source/archive/recovery/soak-qualified localhost port-selection / startup-exit correctness repair candidate
-- Parameters: Gateway shared defaults **v2.17.13**
+- Status: source/archive/recovery/soak-qualified localhost port-selection and startup-exit correctness release
 - Database schema: **5** (unchanged)
 - Immediate source predecessor: **v0.5.1 / WCM-B008**
 
@@ -27,9 +26,9 @@ B009 exact-archive qualification passes 120/120 managed-file integrity, 68/68 te
 
 **v0.3.1 / WCM-B004** remains the strongest physical-Windows confirmed rollback baseline.
 
-## Promotion gate
+## Native Windows qualification gate
 
-Promote B009 only after the exact final ZIP completes on physical Windows with Norton/SmartScreen enabled:
+Physical-Windows qualification remains separate from the source and archive gates. The exact ZIP should complete these checks with Norton and SmartScreen enabled:
 
 1. Start local platform and reach readiness, including a safe fallback if 8010 is intentionally occupied.
 2. Recovery Doctor.

@@ -93,7 +93,7 @@ def test_snapshot_conditional_approvals_permissions_and_audit(client):
             title="Onboard Orion Systems",
             description="Governed software vendor onboarding.",
             requester_name="Jordan Example",
-            requester_email="jordan@example.test",
+            requester_email="jordan@example.com",
             priority="High",
             field_values=_vendor_payload(),
         )
@@ -175,7 +175,7 @@ def test_invalid_date_rejected(client):
                 title="Invalid date case",
                 description="",
                 requester_name="Jordan Example",
-                requester_email="jordan@example.test",
+                requester_email="jordan@example.com",
                 priority="Medium",
                 field_values=values,
             )

@@ -42,6 +42,6 @@
 
 ## Deliberately deferred
 
-The portfolio project does not need a large RPA ecosystem, hundreds of vendor-specific connectors, contact-center omnichannel, unsupervised autonomous agents, or multi-tenant billing. Those would add substantial complexity without strengthening the core case-management/audit story today.
+The current product does not need a large RPA ecosystem, hundreds of vendor-specific connectors, contact-center omnichannel, unsupervised autonomous agents, or multi-tenant billing. Those would add substantial complexity without strengthening the core case-management and audit capabilities today.
 
 Copyright © 2026 Gateway Information Group LLC. All rights reserved.

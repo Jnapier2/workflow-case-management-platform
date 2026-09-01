@@ -1,8 +1,8 @@
-"""Build a deterministic clean source ZIP from managed files and approved empty runtime placeholders.
+"""Build a deterministic clean source ZIP from managed files and approved empty data placeholders.
 
 The builder intentionally excludes mutable runtime state, logs, databases, evidence, caches,
 compiled Python, diagnostics, backups, and local secrets. It packages only release-managed files,
-MANIFEST.json, and the explicit .gitkeep placeholders needed to preserve project-local folders.
+MANIFEST.json, and explicit .gitkeep placeholders for non-diagnostic project-local folders.
 
 Copyright © 2026 Gateway Information Group LLC. All rights reserved.
 """
@@ -24,9 +24,6 @@ from release_inventory import MANIFEST_PATH, managed_paths, normalized_relative
 APPROVED_PLACEHOLDERS = (
     "backups/.gitkeep",
     "data/.gitkeep",
-    "diagnostics/crash_capsules/.gitkeep",
-    "diagnostics/exports/.gitkeep",
-    "diagnostics/temp/.gitkeep",
     "logs/.gitkeep",
     "reports/.gitkeep",
     "state/.gitkeep",

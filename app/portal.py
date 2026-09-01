@@ -41,7 +41,7 @@ def _authorize(request: Request, reference: str) -> None:
 
 
 def _portal_actor(db: Session) -> User:
-    email = "requester.portal@local.invalid"
+    email = "requester.portal@example.invalid"
     actor = db.scalar(select(User).where(User.email == email))
     if actor is None:
         actor = User(name="Requester Portal", email=email, role="External Requester", active=True, capacity=1)
@@ -137,4 +137,3 @@ async def requester_portal_evidence(reference: str, request: Request, evidence: 
     finally:
         await evidence.close()
     return RedirectResponse(f"/portal/cases/{ref}", status_code=303)
-

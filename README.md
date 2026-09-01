@@ -41,7 +41,7 @@ The included sample workflows support a concise walkthrough:
 8. **Operations** — schema/search/worker health, outbox backlog, connector outcomes, storage, Recovery Doctor status, and request timing.
 9. **API Docs** — capability discovery, workflow revisions, case APIs, process intelligence, health/readiness, and audit verification.
 
-See `docs/PORTFOLIO_DEMO_GUIDE.md` for a concise recruiter-facing script.
+See `docs/PORTFOLIO_DEMO_GUIDE.md` for a concise guided walkthrough.
 
 ## Enterprise-style capabilities
 
@@ -203,7 +203,7 @@ No runtime data is intentionally written to Desktop, Downloads, another project,
 
 ## Honest deployment boundaries
 
-This release is a portfolio/recruiter-facing application and a source/archive-qualified candidate—not a certification of production readiness. Specifically:
+This release is a source/archive-qualified demonstration application—not a certification of production readiness. Specifically:
 
 - demo identity is not production authentication;
 - optional OIDC requires a real compatible provider and deployment testing;

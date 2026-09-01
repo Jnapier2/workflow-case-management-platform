@@ -9,8 +9,8 @@
     },
     {
       "path": ".gitignore",
-      "sha256": "C049ACC47311738936C0517AACA14D5153C715759CFB387075769D2D0215B611",
-      "size": 470
+      "sha256": "508B8A44E6D99159A7CF956E3907A7F1FD320E70713F499ECF5E2B1864F8DAAF",
+      "size": 306
     },
     {
       "path": "app/__init__.py",
@@ -74,8 +74,8 @@
     },
     {
       "path": "app/portal.py",
-      "sha256": "D807B1F545796A71A685D29A1C4F19C1CB46D7851AAC7295F2D4291D8C5B9D14",
-      "size": 9144
+      "sha256": "97777B6AFC61B239676FEC04AABD15F1C3C97E8C2A83AEC80D0D08528066CF74",
+      "size": 9145
     },
     {
       "path": "app/presentation.py",
@@ -204,8 +204,8 @@
     },
     {
       "path": "app/services/seed.py",
-      "sha256": "07CA71DCA7E1DA2C26E9B8C1AAB8F83BAD060520FB519A6A6EFD7C856F597DC8",
-      "size": 18151
+      "sha256": "703060DA3F43A937C26FF96EE26A87ECCA4232DB3237FB0E6A9B04E52D8CBB84",
+      "size": 18125
     },
     {
       "path": "app/services/workflow_engine.py",
@@ -394,8 +394,8 @@
     },
     {
       "path": "docs/ROADMAP.md",
-      "sha256": "3A741A5923B482EEDD0C4D5EFD24FDA981395A4568F8A49BF8EC7A30EF9D5EDA",
-      "size": 2844
+      "sha256": "276A393EBAE759B6DA5E3FC09077CA7C2A6ADA5F1D8C444A513EAAE119851D28",
+      "size": 2853
     },
     {
       "path": "docs/SECURITY.md",
@@ -429,8 +429,8 @@
     },
     {
       "path": "KNOWN_GOOD_STATE.md",
-      "sha256": "FFE41B441A67A9E85ECC62000143970E0042BCFF39418426CEF0F2CF4A23E632",
-      "size": 2234
+      "sha256": "252D225B0B895695BC12BED0C5295A840C45E792DD0CBFA3F0C166975F4AD69A",
+      "size": 2242
     },
     {
       "path": "LAUNCH_WORKFLOW_PLATFORM.bat",
@@ -444,13 +444,13 @@
     },
     {
       "path": "PACKAGE_METADATA.json",
-      "sha256": "3A08BFF50FF24CD95878047FEED8AB29BE095C9E2B133B4EBD7D51EFD9305DA7",
+      "sha256": "226E8F1D4D07952B62048ED2D1AE0F6627C5D7C130BF9434B0124D2EF1354E08",
       "size": 6517
     },
     {
       "path": "README.md",
-      "sha256": "82CD19F3614C183FE643A7358F3D3A8113D4EB0C2EA70DB28258DEC3C96360DC",
-      "size": 13931
+      "sha256": "747E26889A738D53E1975FD348452FCAB201A81B2224353843370F5BC197E1A6",
+      "size": 13897
     },
     {
       "path": "requirements.lock.txt",
@@ -474,8 +474,8 @@
     },
     {
       "path": "scripts/build_release_zip.py",
-      "sha256": "F5F8C627D73A2EDD300C9F1E4287DC294C84E1AF6D0ABBC96D4B697B73133E7A",
-      "size": 3883
+      "sha256": "516A9D5CF3F52EC7D1827F71ECF82B03E9A82A1888C08E439BAD7849FB46ABD5",
+      "size": 3764
     },
     {
       "path": "scripts/capture_launcher_failure.py",
@@ -524,8 +524,8 @@
     },
     {
       "path": "scripts/soak_fault_test.py",
-      "sha256": "303CD28884FB7F0BC5EF5D2CB4B37C5AAC2114D21E964A13F952CD8C12C8C1DB",
-      "size": 13166
+      "sha256": "F73606233FDE88A90066068D10A3B18AAD24BD92A7C0DCE10BD49D642B403285",
+      "size": 13165
     },
     {
       "path": "scripts/verify_release.py",
@@ -538,19 +538,24 @@
       "size": 10726
     },
     {
+      "path": "SECURITY.md",
+      "sha256": "5B02F7C0B5CA82C220FFFDDBF1C6E22AE4461AF15D5E80494192CC63C18E386D",
+      "size": 867
+    },
+    {
       "path": "tests/conftest.py",
       "sha256": "820E5359A3BE3DCFF3FADBEF85D7B24AED9EB4D8659AD08E9D5548CAA46C019E",
       "size": 624
     },
     {
       "path": "tests/test_api_and_web.py",
-      "sha256": "7AD628B848D5FCB95377528969EF973D9C972B1D407B81B15931C259E900CA8D",
-      "size": 5044
+      "sha256": "7F581E7BCE5BD4256022A2E7CA8249A3875236E6B45171B645437FA3E1621529",
+      "size": 5043
     },
     {
       "path": "tests/test_database_foundation.py",
-      "sha256": "858B7D4DC630EE6AE5911EA82F1789BAFB207688DD928994E89C490E04407B8E",
-      "size": 4680
+      "sha256": "674D7F53093993A853924E1ECFB384DBCE3E5B43EF1E3C3CEF579B8016DB8F3B",
+      "size": 4678
     },
     {
       "path": "tests/test_diagnostics.py",
@@ -559,13 +564,13 @@
     },
     {
       "path": "tests/test_enterprise_features.py",
-      "sha256": "234ED0F6BEDEBFE7DA7F0CC7CB78284ED87A0B226F35A43257F4B128EA1115C4",
-      "size": 14425
+      "sha256": "4F4CF2E0905C226B7AAE64C98067599BD412A07279F805C5A74F60F148BBB180",
+      "size": 14416
     },
     {
       "path": "tests/test_launcher_field_repair.py",
-      "sha256": "53BCB1CA677A13DF2076C2797A0F24A77B95965E7A745224277EE2FFF073F5AE",
-      "size": 10528
+      "sha256": "63888D8AB8ABC2B7266A32E550DB519D51F1300E9F10D866E2222A600A27DF18",
+      "size": 10533
     },
     {
       "path": "tests/test_logging.py",
@@ -584,13 +589,13 @@
     },
     {
       "path": "tests/test_resilience_foundation.py",
-      "sha256": "3B44FEB00749CD84BEE946847E7F938FE1B86E1F65F299BCEF77329EFB0371FE",
-      "size": 13775
+      "sha256": "2EA7BB43B1FEDEEE5838CF565D8084BF5431A3A861684B1B1FBE1501F7D6E48D",
+      "size": 13774
     },
     {
       "path": "tests/test_runtime_stability.py",
-      "sha256": "DFE25DFCB4ED314C0911AA4071EFAC2D1E34B3895498E426447E486310F5B437",
-      "size": 7013
+      "sha256": "4907680518DDBEAB1B46A119AE5BFA0218009F79E7E79E4B129F8FB88ABF4585",
+      "size": 7012
     },
     {
       "path": "tests/test_smoke.py",
@@ -599,8 +604,8 @@
     },
     {
       "path": "tests/test_workflow_engine.py",
-      "sha256": "E5F612F8D352DB50DCCFA613872D42B6F7CDBB0DDB1E0802E1F7C39091FDFD90",
-      "size": 8094
+      "sha256": "78AC359762890A51C16F6351A10AC8461C289BED22FF13B48C2FA35FD079A2F1",
+      "size": 8092
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -613,9 +618,9 @@
       "size": 22
     }
   ],
-  "generated_utc": "2026-09-01T07:05:01.093085Z",
+  "generated_utc": "2026-09-01T07:57:47.231778Z",
   "hash_algorithm": "SHA-256",
-  "managed_file_count": 122,
+  "managed_file_count": 123,
   "package_id": "gateway.workflow_case_management",
   "path_rules": "root-relative, forward-slash, case-insensitive collision rejection, no symlinks",
   "schema": "gateway-managed-file-manifest-1",

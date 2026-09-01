@@ -30,7 +30,7 @@ def _payload(title: str = "Zephyr Compliance Beacon") -> dict:
         "title": title,
         "description": "Resilience regression request.",
         "requester_name": "Foundation Tester",
-        "requester_email": "foundation@example.test",
+        "requester_email": "foundation@example.com",
         "priority": "Medium",
         "fields": {
             "vendor_name": title,

@@ -73,7 +73,7 @@ def test_seeded_rules_are_idempotent_and_apply_to_intake(client):
 
         workflow = db.scalar(select(WorkflowDefinition).where(WorkflowDefinition.key == "vendor_onboarding"))
         admin = db.scalar(select(User).where(User.role == "Administrator"))
-        case = create_case(db, workflow, admin, title="High-value sensitive vendor", description="", requester_name="Jordan Example", requester_email="jordan@example.test", priority="Medium", field_values=_vendor_payload(spend=300000, personal=True))
+        case = create_case(db, workflow, admin, title="High-value sensitive vendor", description="", requester_name="Jordan Example", requester_email="jordan@example.com", priority="Medium", field_values=_vendor_payload(spend=300000, personal=True))
         db.flush()
         assert case.priority == "High"
         assert {"data_sensitive", "high_value"}.issubset(set(loads(case.tags_json, [])))
@@ -86,8 +86,8 @@ def test_parent_child_gate_blocks_parent_until_child_is_complete(client):
     with _session(client) as db:
         workflow = db.scalar(select(WorkflowDefinition).where(WorkflowDefinition.key == "vendor_onboarding"))
         admin = db.scalar(select(User).where(User.role == "Administrator"))
-        parent = create_case(db, workflow, admin, title="Parent vendor", description="", requester_name="P", requester_email="p@example.test", priority="Medium", field_values=_vendor_payload())
-        child = create_case(db, workflow, admin, title="Child review", description="", requester_name="P", requester_email="p@example.test", priority="Medium", field_values=_vendor_payload())
+        parent = create_case(db, workflow, admin, title="Parent vendor", description="", requester_name="P", requester_email="p@example.com", priority="Medium", field_values=_vendor_payload())
+        child = create_case(db, workflow, admin, title="Child review", description="", requester_name="P", requester_email="p@example.com", priority="Medium", field_values=_vendor_payload())
         _complete_vendor_to_contracting(db, parent, admin)
         create_relation(db, parent, child, "parent_child", admin, "Security sub-review")
         with pytest.raises(TransitionBlocked, match="child"):
@@ -101,7 +101,7 @@ def test_transition_connector_is_durable_and_audited(client):
     with _session(client) as db:
         workflow = db.scalar(select(WorkflowDefinition).where(WorkflowDefinition.key == "vendor_onboarding"))
         admin = db.scalar(select(User).where(User.role == "Administrator"))
-        case = create_case(db, workflow, admin, title="Connector vendor", description="", requester_name="C", requester_email="c@example.test", priority="Medium", field_values=_vendor_payload())
+        case = create_case(db, workflow, admin, title="Connector vendor", description="", requester_name="C", requester_email="c@example.com", priority="Medium", field_values=_vendor_payload())
         _complete_vendor_to_contracting(db, case, admin)
         transition_case(db, case, admin, "completed")
         db.commit()
@@ -121,7 +121,7 @@ def test_workflow_draft_publish_preserves_existing_case_snapshot(client):
     with _session(client) as db:
         workflow = db.scalar(select(WorkflowDefinition).where(WorkflowDefinition.key == "vendor_onboarding"))
         admin = db.scalar(select(User).where(User.role == "Administrator"))
-        case = create_case(db, workflow, admin, title="Versioned vendor", description="", requester_name="V", requester_email="v@example.test", priority="Medium", field_values=_vendor_payload())
+        case = create_case(db, workflow, admin, title="Versioned vendor", description="", requester_name="V", requester_email="v@example.com", priority="Medium", field_values=_vendor_payload())
         captured = case.workflow_version
         config = loads(workflow.config_json, {})
         draft_config = deepcopy(config)
@@ -146,7 +146,7 @@ def test_portal_create_update_and_case_audit_capture_requester_exchange(client):
         "workflow_key": "vendor_onboarding",
         "title": "Portal vendor request",
         "requester_name": "Portal User",
-        "requester_email": "portal.user@example.test",
+        "requester_email": "portal.user@example.com",
         "description": "Submitted through self-service.",
         "field__vendor_name": "Portal Vendor",
         "field__service_category": "Software",
@@ -202,7 +202,7 @@ def test_skill_aware_assignment_and_canary_deployment(client):
         draft = save_draft(db, workflow, config, admin, "Canary deployment test")
         publish_draft(db, workflow, draft, admin)
         assert workflow.version == baseline + 1
-        case = create_case(db, workflow, admin, title="Canary baseline case", description="", requester_name="Canary", requester_email="canary@example.test", priority="Medium", field_values=_vendor_payload())
+        case = create_case(db, workflow, admin, title="Canary baseline case", description="", requester_name="Canary", requester_email="canary@example.com", priority="Medium", field_values=_vendor_payload())
         assert case.workflow_version == baseline
         transition_case(db, case, admin, "validation")
         transition_case(db, case, admin, "due_diligence")
@@ -223,7 +223,7 @@ def test_external_case_assist_is_explicit_redacted_and_non_executable(client, mo
         assert "comments" not in payload
         assert "attachments" not in payload
 
-        monkeypatch.setenv("WORKFLOW_ASSIST_HTTPS_ENDPOINT", "https://advisor.example.test/case")
+        monkeypatch.setenv("WORKFLOW_ASSIST_HTTPS_ENDPOINT", "https://advisor.example.com/case")
         monkeypatch.delenv("WORKFLOW_ASSIST_SECRET_ENV", raising=False)
         monkeypatch.setattr(assist_remote, "validate_https_endpoint", lambda url, **_: url)
 
@@ -259,7 +259,7 @@ def test_oidc_mode_keeps_health_public_and_requires_session_for_case_apis(tmp_pa
     from app.main import create_app
 
     monkeypatch.setenv("WORKFLOW_AUTH_MODE", "oidc")
-    monkeypatch.setenv("WORKFLOW_OIDC_ISSUER", "https://identity.example.test")
+    monkeypatch.setenv("WORKFLOW_OIDC_ISSUER", "https://identity.example.com")
     monkeypatch.setenv("WORKFLOW_OIDC_CLIENT_ID", "portfolio-client")
     settings = Settings(
         root=tmp_path,

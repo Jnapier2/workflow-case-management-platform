@@ -19,7 +19,7 @@ def _payload() -> dict:
         "title": "Onboard Atlas Data",
         "description": "Portfolio API creation test.",
         "requester_name": "Avery Example",
-        "requester_email": "avery@example.test",
+        "requester_email": "avery@example.com",
         "priority": "High",
         "fields": {
             "vendor_name": "Atlas Data",

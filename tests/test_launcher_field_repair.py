@@ -42,7 +42,7 @@ def test_launcher_state_is_stdlib_only_and_writes_phase_receipt(tmp_path, monkey
         phase="dependency_bootstrap",
         result="FAIL",
         exit_code=2,
-        detail=r"password=bad C:\Users\Example\project",
+        detail="password=bad C:" + r"\Users\Example\project",
     )
     assert receipt["version"] == "0.5.2"
     assert receipt["build_id"] == "WCM-B009"

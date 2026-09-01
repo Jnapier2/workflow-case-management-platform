@@ -48,7 +48,7 @@ def _payload(index: int) -> dict:
         "title": f"Soak Vendor {index}",
         "description": "Isolated resilience qualification request.",
         "requester_name": f"Soak Requester {index}",
-        "requester_email": f"soak{index}@example.test",
+        "requester_email": f"soak{index}@example.com",
         "priority": "Medium" if index % 5 else "High",
         "fields": {
             "vendor_name": f"Soak Vendor {index}",

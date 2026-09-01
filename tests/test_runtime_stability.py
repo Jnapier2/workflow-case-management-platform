@@ -25,7 +25,7 @@ def _payload(index: int = 1) -> dict:
         "title": f"Stable intake {index}",
         "description": "Runtime stability regression case.",
         "requester_name": "Stability Tester",
-        "requester_email": f"stable{index}@example.test",
+        "requester_email": f"stable{index}@example.com",
         "priority": "Medium",
         "fields": {
             "vendor_name": f"Stable Vendor {index}",
