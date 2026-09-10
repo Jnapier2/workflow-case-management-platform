@@ -33,6 +33,7 @@ This source release does not redistribute third-party source trees or binary dep
 | SQLAlchemy | 2.0.52 | MIT | Database mapping and queries |
 | starlette | 1.6.0 | BSD-3-Clause | FastAPI web foundation |
 | tomli | 2.3.0 | MIT | Python 3.10 TOML support |
+| tzdata | 2026.2 | Apache-2.0 | IANA time zone data fallback for business-calendar calculations on Windows |
 | typing_extensions | 4.16.0 | PSF-2.0 | Cross-version typing support |
 | typing-inspection | 0.4.2 | MIT | Pydantic/FastAPI typing inspection |
 | uvicorn | 0.52.4 | BSD-3-Clause | Local ASGI server |

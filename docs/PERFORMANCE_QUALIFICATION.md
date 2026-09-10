@@ -20,10 +20,12 @@ No network, browser rendering, Windows filesystem, antivirus, or production conc
 
 | Measure | 0.1.0 / WCM-B001 | 0.2.0 / WCM-B002 | Observed change |
 |---|---:|---:|---:|
-| Dashboard build, median | 507.6 ms | 88.3 ms | ~5.8× faster |
+| Dashboard build, median | 507.6 ms | 88.3 ms | ~5.75× faster |
 | Dashboard build, min | 390.5 ms | 83.0 ms | — |
 | Dashboard build, max | 533.1 ms | 96.3 ms | — |
-| One new intake with 20k history | 23.9 ms | 3.7 ms | ~6.4× faster |
+| One new intake with 20k history | 23.9 ms | 3.7 ms | ~6.46× faster |
+
+The comparison ratios above are calculated from the rounded durations displayed in the table; they do not imply additional measurement precision.
 
 The 0.2.0 dashboard samples were approximately 85.0, 83.0, 88.3, 92.7, 86.4, 96.3, and 92.9 ms. The 0.1.0 samples were approximately 500.3, 494.1, 533.1, 521.3, 519.1, 390.5, and 507.6 ms.
 
@@ -33,7 +35,7 @@ The 0.2.0 dashboard samples were approximately 85.0, 83.0, 88.3, 92.7, 86.4, 96.
 
 ## Remaining scaling boundary
 
-Snapshot-aware bottleneck and workload calculations still inspect the active/open case set in Python because historical workflow snapshots may carry different stage labels and service-level targets. This is intentional for correctness in the current portfolio build. If active-case volume becomes large enough to matter, the next optimization should be measured first and should preserve snapshot semantics, likely by introducing normalized snapshot/stage reporting dimensions rather than caching blindly.
+Snapshot-aware bottleneck and workload calculations still inspect the active/open case set in Python because historical workflow snapshots may carry different stage labels and service-level targets. This is intentional for correctness in the current portfolio build. The comparison does not establish performance at larger active-case volumes.
 
 ## 0.3.0 resilience qualification retained in 0.5.2
 

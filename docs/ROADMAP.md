@@ -1,47 +1,21 @@
-# Roadmap
+# Workflow & Case Management Platform — Current Capabilities and Evaluation Limits
 
-## Completed through 0.5.2
+Version 0.5.2 demonstrates configurable case workflows, business-calendar service targets, approvals, work queues, process analysis, and auditable follow-through using synthetic examples.
 
-### Reliability foundation
+## Reviewable design choices
 
-- fail-closed release identity and one active Windows launcher;
-- SQLite WAL/busy timeout/indexing and PostgreSQL-ready persistence;
-- checked pre-migration backup and versioned schema ledger;
-- Recovery Doctor with isolated restore verification;
-- durable outbox with priority, dedupe, retries, stale-job recovery, and PostgreSQL `SKIP LOCKED` leasing;
-- FTS5/indexed fallback and PostgreSQL full-text path;
-- operational health, bounded logs, Critical diagnostics, Export20, soak/fault qualification;
-- diagnostic evidence identity/freshness classification.
+- Each case retains the workflow version and configuration that governed its creation.
+- Rules remain separate from orchestration and can be explained before application.
+- Ownership, approvals, relationships, deadlines, and recorded activity remain visible together.
+- Controlled connector and advisory interfaces retain explicit authorization boundaries.
+- Recovery and integrity checks make incomplete evidence visible.
 
-### Enterprise case-management layer
+## Evaluation boundary
 
-- visual workflow Studio over the executable workflow model;
-- declarative Rules Studio and read-only rule explanation/playground;
-- workflow draft/publish/diff/revision history, controlled migration, deterministic canary rollout;
-- parent/child/related/duplicate/blocking cases;
-- business-calendar SLA, warning/escalation policy, auditable pause/resume;
-- saved/shared queues, bulk actions, delegation, workload capacity and skills;
-- durable connector framework with HTTPS safety/idempotency;
-- requester portal, requester updates, evidence, knowledge guidance;
-- process intelligence and improvement-opportunity heuristics;
-- guarded local Case Assist and optional redacted external advisory adapter;
-- optional OIDC auth-code/PKCE, stable issuer+subject identity, role mapping, API session enforcement;
-- streamed evidence-store abstraction with SHA-256 verification.
+The included local demonstration is not a production deployment. Live PostgreSQL migration, concurrency and recovery; provider-specific identity behavior; external notification delivery; independent security review; and exact physical-Windows endpoint-protection acceptance remain unqualified unless a dated, environment-specific record establishes them.
 
-## Highest-value future production evolution
+No production object-storage service, multi-tenant isolation, records-retention certification, or public-internet hardening is claimed.
 
-- physical-Windows/Norton/SmartScreen qualification of the exact release;
-- live disposable PostgreSQL migration/rollback, backup/restore, and multi-worker qualification;
-- private object-storage evidence adapter with server-side encryption, malware-scanning hook, retention policy, and signed retrieval;
-- live SMTP/Teams/Slack-style notification adapters behind the durable connector contract;
-- provider-specific OIDC logout/session-expiry/refresh behavior and independent security review;
-- tenant/organizational-unit isolation if a real multi-customer SaaS requirement appears;
-- records-retention/legal-hold/disposition policies when a concrete governance regime is defined;
-- long-duration soak with thousands of cases, evidence I/O, forced process interruptions, disk pressure, and repeated restarts;
-- signed/provenance-attested releases and CI security checks.
-
-## Deliberately deferred
-
-The current product does not need a large RPA ecosystem, hundreds of vendor-specific connectors, contact-center omnichannel, unsupervised autonomous agents, or multi-tenant billing. Those would add substantial complexity without strengthening the core case-management and audit capabilities today.
+See [the walkthrough](PORTFOLIO_DEMO_GUIDE.md), [security boundaries](SECURITY.md), and [historical qualification scope](PERFORMANCE_QUALIFICATION.md) for the available evidence and its limits.
 
 Copyright © 2026 Gateway Information Group LLC. All rights reserved.
