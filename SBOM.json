@@ -250,6 +250,14 @@
       "version": "4.16.0"
     },
     {
+      "license": "Apache-2.0",
+      "name": "tzdata",
+      "purpose": "IANA time zone data fallback for business-calendar calculations on Windows",
+      "scope": "transitive",
+      "source": "PyPI",
+      "version": "2026.2"
+    },
+    {
       "license": "BSD-3-Clause",
       "name": "uvicorn",
       "purpose": "Local ASGI server",

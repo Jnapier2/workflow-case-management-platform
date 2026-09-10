@@ -369,8 +369,8 @@
     },
     {
       "path": "docs/PERFORMANCE_QUALIFICATION.md",
-      "sha256": "DB43E324144C99E3898C40611F75B096EF82EE8E30D82C71FA6521F5FBF644D3",
-      "size": 3478
+      "sha256": "B1CA4B46A043908DBEB0CAF3BEC3F9EF8C4B57F3BD93F6E2B31BB886D1C8BFB0",
+      "size": 3465
     },
     {
       "path": "docs/PORTFOLIO_DEMO_GUIDE.md",
@@ -394,8 +394,8 @@
     },
     {
       "path": "docs/ROADMAP.md",
-      "sha256": "276A393EBAE759B6DA5E3FC09077CA7C2A6ADA5F1D8C444A513EAAE119851D28",
-      "size": 2853
+      "sha256": "B2479F13A1CDB08F34358EB1BBBD904857907D68BF96F87F76DB8B2EA8666832",
+      "size": 1511
     },
     {
       "path": "docs/SECURITY.md",
@@ -444,7 +444,7 @@
     },
     {
       "path": "PACKAGE_METADATA.json",
-      "sha256": "6EE5432ED6D5E0FC2C02AC6F183CA1BAD2120B97A030F1A632DB03906CB9A278",
+      "sha256": "CBC987E45716D141720E15D2B74E9F4972FE17943DD6C947BF526BD0B78B5F8C",
       "size": 6517
     },
     {
@@ -454,8 +454,8 @@
     },
     {
       "path": "requirements.lock.txt",
-      "sha256": "A6D1A9DF4586D6934B29009A478903E4DD9052B93B8C0FDBB0FA15FC57C506D7",
-      "size": 799
+      "sha256": "84DE95C93F2E76A9C729C91F15C5DCC9ECFFC72575FC0DC2BC1196E41C63F25C",
+      "size": 814
     },
     {
       "path": "requirements.txt",
@@ -464,8 +464,8 @@
     },
     {
       "path": "SBOM.json",
-      "sha256": "BD70DCAEB15FDB19F0AEF6F8AEE1A02F66771F0F0CE826FBA9B2CABAF6BB497C",
-      "size": 6646
+      "sha256": "CCC788B3CC1BAFA9D348AE90EBF919BAFFAC9BA4A7DDDDD681C1D43D2E154F0A",
+      "size": 6888
     },
     {
       "path": "scripts/bootstrap.py",
@@ -609,8 +609,8 @@
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "sha256": "7C5B7FAA21F4543B0C3FDCBC106959585EA24941B2572AB457FCBFBAE44ABECC",
-      "size": 2798
+      "sha256": "E3F5EFA19B002FDEED6420E20C9870520B65DD2CD62798B973F4DC2B7F7CF262",
+      "size": 2908
     },
     {
       "path": "VERSION.txt",
@@ -618,7 +618,7 @@
       "size": 22
     }
   ],
-  "generated_utc": "2026-09-01T08:46:28.091993Z",
+  "generated_utc": "2026-09-10T01:40:58.505150Z",
   "hash_algorithm": "SHA-256",
   "managed_file_count": 123,
   "package_id": "gateway.workflow_case_management",
