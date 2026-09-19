@@ -444,7 +444,7 @@
     },
     {
       "path": "PACKAGE_METADATA.json",
-      "sha256": "CBC987E45716D141720E15D2B74E9F4972FE17943DD6C947BF526BD0B78B5F8C",
+      "sha256": "78B09DACE647A3F443D5ACBECF44AB7E72FBB4179333FFF0E0611B47900EF441",
       "size": 6517
     },
     {
@@ -454,7 +454,7 @@
     },
     {
       "path": "requirements.lock.txt",
-      "sha256": "84DE95C93F2E76A9C729C91F15C5DCC9ECFFC72575FC0DC2BC1196E41C63F25C",
+      "sha256": "F360998707CD2D20C1A58E7B00FBD8ECF438749A26DC2779D360FF539675CA63",
       "size": 814
     },
     {
@@ -464,7 +464,7 @@
     },
     {
       "path": "SBOM.json",
-      "sha256": "CCC788B3CC1BAFA9D348AE90EBF919BAFFAC9BA4A7DDDDD681C1D43D2E154F0A",
+      "sha256": "A5D2BA7B2E0E6AB21EB460E3C924B10FDB5A72487553B2ED965B366182B7567E",
       "size": 6888
     },
     {
@@ -609,7 +609,7 @@
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "sha256": "E3F5EFA19B002FDEED6420E20C9870520B65DD2CD62798B973F4DC2B7F7CF262",
+      "sha256": "C5B4E6B6C855BF679E65B36E092CDE2C4A97B377A34F2A0BE767909848DD2D61",
       "size": 2908
     },
     {
@@ -618,7 +618,7 @@
       "size": 22
     }
   ],
-  "generated_utc": "2026-09-10T01:40:58.505150Z",
+  "generated_utc": "2026-09-19T23:36:17.544790Z",
   "hash_algorithm": "SHA-256",
   "managed_file_count": 123,
   "package_id": "gateway.workflow_case_management",

@@ -38,7 +38,7 @@
   "launcher_consolidation": "one active BAT/CMD; scripts/workflow_platform.py remains the one action router; run_server.py now performs bounded non-destructive localhost port selection and preserves nonzero Uvicorn startup exits; launcher_state.py records phases before dependency/application imports",
   "live_sqlite_qualification": "v0.5.2 exact archive qualified: 68/68 tests, occupied-port fallback/readiness PASS, Recovery Doctor PASS, 120-case/8-worker soak PASS, B008 schema-5 compatibility PASS; exact physical-Windows BAT + Norton/SmartScreen remains pending",
   "managed_file_count": 123,
-  "manifest_generated_utc": "2026-09-10T01:40:58.505150Z",
+  "manifest_generated_utc": "2026-09-19T23:36:17.544790Z",
   "package_id": "gateway.workflow_case_management",
   "postgresql_schema_mode": "explicit protected migration; normal startup fail-closed on mismatch",
   "previous_release": "0.5.1 / WCM-B008",

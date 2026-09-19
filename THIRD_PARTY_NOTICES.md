@@ -6,7 +6,7 @@ This source release does not redistribute third-party source trees or binary dep
 |---|---:|---|---|
 | annotated-doc | 0.0.4 | MIT | FastAPI documentation metadata |
 | annotated-types | 0.7.0 | MIT | Pydantic annotated constraints |
-| anyio | 4.13.0 | MIT | Async compatibility layer |
+| anyio | 4.14.2 | MIT | Async compatibility layer |
 | certifi | 2026.5.20 | MPL-2.0 | Certificate authority bundle for HTTPX |
 | click | 8.1.8 | BSD-3-Clause | Uvicorn command support |
 | colorama | 0.4.6 | BSD-3-Clause | Windows terminal compatibility |
