@@ -23,7 +23,7 @@
       "purpose": "Async compatibility layer",
       "scope": "transitive",
       "source": "PyPI",
-      "version": "4.13.0"
+      "version": "4.14.2"
     },
     {
       "license": "MPL-2.0",
