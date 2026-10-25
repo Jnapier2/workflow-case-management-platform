@@ -4,9 +4,15 @@ A configurable case-management platform that turns business requests into contro
 
 Version **0.5.2 / WCM-B009** is the Windows startup port/exit-correctness maintenance release over the B007 enterprise product layer: visual workflow and rules configuration, related/child cases, business-calendar SLAs, saved work queues, bulk actions, delegation and skill/capacity-aware routing, durable integration connectors, a requester portal and knowledge base, process intelligence, controlled workflow-version deployment, guarded Case Assist, optional OIDC identity, and a storage-adapter boundary for evidence.
 
+## Inspect the demonstration
+
+Download the [v0.5.2 source snapshot](https://github.com/Jnapier2/workflow-case-management-platform/archive/891a9a8e3f78a05f2fa673d3e7aad7c66e1c751b.zip) for local inspection, or follow the [synthetic product walkthrough](docs/PORTFOLIO_DEMO_GUIDE.md). This repository offers runnable source; it has no separately published GitHub application release. A source archive does not establish native Windows acceptance.
+
 ## Run it on Windows
 
-1. Extract the release ZIP into a normal writable local folder.
+The steps below describe the included launcher workflow and require the complete source folder.
+
+1. Extract the complete source archive into a normal writable local folder.
 2. Double-click `LAUNCH_WORKFLOW_PLATFORM.bat`.
 3. Press Enter for **Start local platform**, or choose another maintenance action.
 4. The launcher verifies version/build agreement, the managed-file manifest, every managed SHA-256, and the one-active-launcher contract before dependency preparation or application startup.
