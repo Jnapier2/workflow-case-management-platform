@@ -31,7 +31,7 @@
       "purpose": "Certificate authority bundle for HTTPX",
       "scope": "transitive",
       "source": "PyPI",
-      "version": "2026.5.20"
+      "version": "2026.10.23"
     },
     {
       "license": "BSD-3-Clause",
