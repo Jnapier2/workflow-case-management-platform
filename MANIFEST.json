@@ -444,13 +444,13 @@
     },
     {
       "path": "PACKAGE_METADATA.json",
-      "sha256": "414240FF2A651DFD6DB5A582CE5878CA7F51BFA66864D4BB61E9903F889D2133",
+      "sha256": "AB047E76E8C39F9147AD0FE55E402838EE30DBBE503AB1D72292DE10A0BB4BCE",
       "size": 6517
     },
     {
       "path": "README.md",
-      "sha256": "AD4198423E3E9FED7AC219F4CCADF5E0962258CBCA341BDA8B264537FEC0264B",
-      "size": 14376
+      "sha256": "A5C3C90702C91E686FD9704A4CA0D1B8B2CA79A791DD56D8B57812368F6D7292",
+      "size": 14604
     },
     {
       "path": "requirements.lock.txt",
@@ -618,7 +618,7 @@
       "size": 22
     }
   ],
-  "generated_utc": "2026-11-25T03:45:31.253391Z",
+  "generated_utc": "2026-11-25T03:49:34.179026Z",
   "hash_algorithm": "SHA-256",
   "managed_file_count": 123,
   "package_id": "gateway.workflow_case_management",
