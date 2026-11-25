@@ -6,7 +6,7 @@ Version **0.5.2 / WCM-B009** is the Windows startup port/exit-correctness mainte
 
 ## Inspect the demonstration
 
-Download the [v0.5.2 source snapshot](https://github.com/Jnapier2/workflow-case-management-platform/archive/9ae30ccc791e6a9b556874fc64f5e22b3242c479.zip) for local inspection, or follow the [synthetic product walkthrough](docs/PORTFOLIO_DEMO_GUIDE.md). The [Windows release gate](https://github.com/Jnapier2/workflow-case-management-platform/actions/runs/44471518813) records the automated checks for this exact snapshot. This repository offers runnable source; it has no separately published GitHub application release. A source archive does not establish native Windows acceptance.
+The [synthetic product walkthrough](docs/PORTFOLIO_DEMO_GUIDE.md) shows what to inspect. If you already have the source folder, continue with the Windows steps below. For a fresh download and its verification record, visit the [GitHub project page](https://github.com/Jnapier2/workflow-case-management-platform#inspect-the-demonstration).
 
 ## Run it on Windows
 
